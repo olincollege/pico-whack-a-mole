@@ -18,14 +18,24 @@
 # # initialize the Raspberry Pi Pico SDK
 # pico_sdk_init()
 
-add_executable(led_test
-    led_test.cpp
-)
 
-target_link_libraries(led_test
+add_library(keypad_ctrl
+        keypad_ctrl.cpp
+        keypad_ctrl.h
+        )
+target_link_libraries(keypad_ctrl
         pico_rgb_keypad
         pico_stdlib
         )
 
+add_executable(main_loop
+    main_loop.c
+)
+
+target_link_libraries(main_loop
+    pico_stdlib
+    keypad_ctrl
+)
+
 # Generate the UF2 file
-pico_add_extra_outputs(led_test)
+pico_add_extra_outputs(main_loop)
