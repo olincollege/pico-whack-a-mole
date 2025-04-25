@@ -7,7 +7,7 @@ include(pico_sdk_import.cmake)
 
 # TODO: Define a good project in the line below. If applicable, list other
 # languages in this project managed by CMake.
-project(ProjectTitle C CXX ASM)
+project(Whack-A-Mole C CXX ASM)
 
 # Initialize the SDK
 pico_sdk_init()
@@ -52,7 +52,7 @@ set(CMAKE_C_CLANG_TIDY "clang-tidy")
 # If you want to use a different framework, or if you want to skip testing
 # entirely (not recommended), change the lines below.
 # include(CTest)
-# find_library(CRITERION criterion REQUIRED)
+# find_library(CRITERION criterion CRITERION REQUIRED)
 # set(CRITERION_FLAGS --verbose -j1)
 
 # add_subdirectory(test)
