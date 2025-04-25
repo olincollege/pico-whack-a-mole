@@ -1,5 +1,7 @@
 #include "game_ctrl.h"
 
+#include <stdlib.h>
+
 const int MIN_LED = 0;
 const int MAX_LED = 15;
 
