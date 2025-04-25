@@ -23,10 +23,16 @@ add_library(keypad_ctrl
         keypad_ctrl.cpp
         keypad_ctrl.h
         )
+
+add_library(game_ctrl
+    game_ctrl.c
+    game_ctrl.h
+)
+
 target_link_libraries(keypad_ctrl
-        pico_rgb_keypad
-        pico_stdlib
-        )
+    pico_rgb_keypad
+    pico_stdlib
+)
 
 add_executable(main_loop
     main_loop.c
@@ -35,6 +41,7 @@ add_executable(main_loop
 target_link_libraries(main_loop
     pico_stdlib
     keypad_ctrl
+    game_ctrl
 )
 
 # Generate the UF2 file
