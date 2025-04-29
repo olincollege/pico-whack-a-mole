@@ -37,6 +37,15 @@ target_link_libraries(keypad_ctrl
 add_executable(main_loop
     main_loop.c
 )
+add_executable(scoring
+    scoring.c
+)
+
+target_link_libraries(scoring
+    hardware_i2c
+    pico_stdlib
+)
+
 
 target_link_libraries(main_loop
     pico_stdlib
@@ -46,3 +55,4 @@ target_link_libraries(main_loop
 
 # Generate the UF2 file
 pico_add_extra_outputs(main_loop)
+pico_add_extra_outputs(scoring)
