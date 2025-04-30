@@ -17,13 +17,22 @@ void keypad_setup(void);
 
 
 /**
- * Function to flash an LED on and off.
+ * Function to turn on a LED.
  * 
- * @param led: The integer representing an LED button on the keypad to flash
- * @param time_on: An integer in ms representing the amount of time the LED 
- * will spend on and off
+ * @param led: The integer representing an LED button on the keypad to turn on
+ * @param is_led_on: A pointer to an integer (0 or 1) representing the current
+ * on state of the LED. 
  */
-void flash_led(int led, int time_on);
+void turnon_led (int led, int* is_led_on);
+
+/**
+ * Function to turn off a LED.
+ * 
+ * @param led: The integer representing an LED button on the keypad to turn off
+ * @param is_led_on: A pointer to an integer (0 or 1) representing the current
+ * on state of the LED. 
+ */
+void turnoff_led (int led, int* is_led_on);
 
 /**
  * Function to find which button 0-15 has been pressed. Only works for one press,

@@ -2,7 +2,7 @@
 
 #include <stdlib.h>
 
-const int MIN_LED = 0;
+const int MIN_LED = 1;
 const int MAX_LED = 15;
 
 int generate_rand_led() {
