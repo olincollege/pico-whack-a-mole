@@ -1,4 +1,5 @@
 #pragma once
+#include <stdint.h>
 
 /**
  * args: unsigned int of 8 bytes (uint8_t) called val
