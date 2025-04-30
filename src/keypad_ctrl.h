@@ -13,7 +13,7 @@ extern "C" {
 /**
  * Function to initialize and setup keypad.
  */
-void keypad_setup();
+void keypad_setup(void);
 
 
 /**
@@ -24,6 +24,26 @@ void keypad_setup();
  * will spend on and off
  */
 void flash_led(int led, int time_on);
+
+/**
+ * Function to find which button 0-15 has been pressed. Only works for one press,
+ * and returns only the first one from 0 to 15 if mulitple are pressed at the same time.
+ * 
+ * @param cur_states An unsigned 16-bit integer containing current button states, each bit
+ * representing if the button is currently being pressed (1) or not (0)
+ * @param prev_states An unsigned 16-bit integer containing previous button states
+ * 
+ * @return An integer (0-15) representing which button was pressed.
+ */
+int button_pressed(uint16_t cur_states, uint16_t prev_states);
+
+/**
+ * Function to get current button states.
+ * 
+ * @return An unsigned 16-bit integer containing current button states, each bit
+ * representing if the button is currently being pressed (1) or not (0)
+ */
+uint16_t get_buttons(void);
 
 #ifdef __cplusplus
 }
