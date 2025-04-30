@@ -2,9 +2,11 @@
 # of Ubuntu, which at the time of writing is 22.04.
 cmake_minimum_required(VERSION 3.22)
 
-# file(READ "./pico_sdk_path.txt" PICO_PATH)
+file(READ "${CMAKE_SOURCE_DIR}/pico_sdk_path.txt" PICO_PATH)
 
-set(ENV{PICO_SDK_PATH} "/home/esun/Documents/SoftSys/pico-sdk/")
+string(STRIP "${PICO_PATH}" PICO_PATH)
+
+set(ENV{PICO_SDK_PATH} ${PICO_PATH})
 
 # Pull in PICO SDK (must be before project)
 include(pico_sdk_import.cmake)
