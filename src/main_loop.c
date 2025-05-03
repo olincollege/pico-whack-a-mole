@@ -5,12 +5,16 @@
 #include "game_ctrl.h"
 #include "keypad_ctrl.h"
 #include "pico/stdlib.h"
+#include "scoring.h"
 
 int main(void) {
   keypad_setup();
+  lcd_setup();
   uint16_t cur_states = 0;
   uint16_t last_states = 0;
-  int* is_led_on = (int*)malloc(sizeof(int*));
+  int* score = (int*)malloc(sizeof(int));
+  *score = 0;
+  int* is_led_on = (int*)malloc(sizeof(int));
   *is_led_on = 0;
   int target_led = 0;
 
@@ -36,6 +40,9 @@ int main(void) {
       int pressed = button_pressed(cur_states, last_states);
 
       if (*is_led_on && (target_led == pressed)) {
+        update_score(score);
+        turnoff_led(target_led, is_led_on);
+        break;
         // trigger the increase score function here
         // turn led off
         // break
@@ -44,6 +51,6 @@ int main(void) {
     }
   }
   free(is_led_on);
-
+  free(score);
   return 0;
 }

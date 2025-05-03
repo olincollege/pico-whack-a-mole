@@ -30,9 +30,5 @@ void lcd_send_string(const char* str);
  * if fail -1
  * return intger
  */
-int update_score(int result);
-
-/**
- * print out the score in terminal or lcd screen
- */
-void display();
+void update_score(int* score);
+void lcd_setup();

@@ -29,6 +29,11 @@ add_library(game_ctrl
     game_ctrl.h
 )
 
+add_library(scoring
+    scoring.c
+    scoring.h
+)
+
 target_link_libraries(keypad_ctrl
     pico_rgb_keypad
     pico_stdlib
@@ -36,9 +41,6 @@ target_link_libraries(keypad_ctrl
 
 add_executable(main_loop
     main_loop.c
-)
-add_executable(scoring
-    scoring.c
 )
 
 target_link_libraries(scoring
@@ -51,8 +53,8 @@ target_link_libraries(main_loop
     pico_stdlib
     keypad_ctrl
     game_ctrl
+    scoring
 )
 
 # Generate the UF2 file
 pico_add_extra_outputs(main_loop)
-pico_add_extra_outputs(scoring)
