@@ -1,17 +1,10 @@
 // main game loop
 #include <stdio.h>
 #include <stdlib.h>
-#include <sys/time.h>
 
 #include "game_ctrl.h"
 #include "keypad_ctrl.h"
 #include "pico/stdlib.h"
-
-unsigned long get_time() {
-  struct timeval tv;
-  gettimeofday(&tv, NULL);
-  return (tv.tv_sec * 1000) + (tv.tv_usec / 1000);
-}
 
 int main(void) {
   keypad_setup();
@@ -44,6 +37,8 @@ int main(void) {
 
       if (*is_led_on && (target_led == pressed)) {
         // trigger the increase score function here
+        // turn led off
+        // break
       }
       last_states = cur_states;
     }

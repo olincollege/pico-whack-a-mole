@@ -7,6 +7,11 @@
  *
  * @return An int representing a random LED to turn on
  */
-int generate_rand_led();
+int generate_rand_led(void);
 
-// when a button is pressed, check to see it matches the random number
+/**
+ * Fetches the current time in ms
+ *
+ * @return An unsigned long representing the current time in ms
+ */
+unsigned long get_time(void);
