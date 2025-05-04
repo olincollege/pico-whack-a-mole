@@ -1,28 +1,10 @@
-# Some compilers warn that the return value of cr_assert gets converted from an
-# int to a unsigned char:1. To avoid this error in those compilers, turn off
-# conversion warnings for test code.
-set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Wno-conversion")
-
-list(APPEND CMAKE_CTEST_ARGUMENTS --verbose)
-
-# If you need to test a library called foo, use lines like the following.
-# add_executable(test_foo test_foo.c)
-# target_link_libraries(test_foo
-#     PRIVATE foo
-#     PUBLIC ${CRITERION}
-# )
-# add_test(
-#     NAME test_foo
-#     COMMAND test_foo ${CRITERION_FLAGS}
-# )
-
-
-# add_executable(test_button test_button.c)
-# target_link_libraries(test_button
-#     PRIVATE game_ctrl
-#     PUBLIC ${CRITERION}
-# )
-# add_test(
-#     NAME test_button
-#     COMMAND test_button ${CRITERION_FLAGS}
-# )
+# If you have a program that's just a .c file and it has a main method, define
+# an executable. If it has both a .c and .h file, make it a library. Also, link
+# libraries appropriately here. Targets should be added in dependency order - if
+# executable bar needs library foo, then you should do
+#   add_library(foo foo.c foo.h)
+#   add_executable(bar bar.c)
+#   target_link_libraries(bar PRIVATE foo)
+# or similar. The PRIVATE/INTERFACE/PUBLIC keyword will depend on whether the
+# library is used only in function bodies (PRIVATE), only in function
+# signatures/types (INTERFACE), or both (PUBLIC).

@@ -9,16 +9,6 @@
 # library is used only in function bodies (PRIVATE), only in function
 # signatures/types (INTERFACE), or both (PUBLIC).
 
-
-# cmake_minimum_required(VERSION 3.13)
-# # initialize the SDK based on PICO_SDK_PATH
-# # note: this must happen before project()
-# include(pico_sdk_import.cmake)
-
-# # initialize the Raspberry Pi Pico SDK
-# pico_sdk_init()
-
-
 add_library(keypad_ctrl
         keypad_ctrl.cpp
         keypad_ctrl.h
