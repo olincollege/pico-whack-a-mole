@@ -34,17 +34,25 @@ void turnon_led (int led, int* is_led_on);
  */
 void turnoff_led (int led, int* is_led_on);
 
-void correct_pressed(int led);
+/**
+ * Function to flash the status of the LED pressed (correct or incorrect). The LED will
+ * flash green if it's the correct one, and red if it's incorrectly pressed.
+ * 
+ * @param led: The integer representing an LED button on the keypad to flash
+ * @param correct: An integer representing if the LED pressed was correct (1) or not (0)
+ */
+void flash_status(int led, int correct);
 
 /**
  * Function to find which button 0-15 has been pressed. Only works for one press,
  * and returns only the first one from 0 to 15 if mulitple are pressed at the same time.
+ * Returns -1 if none are pressed.
  * 
  * @param cur_states An unsigned 16-bit integer containing current button states, each bit
  * representing if the button is currently being pressed (1) or not (0)
  * @param prev_states An unsigned 16-bit integer containing previous button states
  * 
- * @return An integer (0-15) representing which button was pressed.
+ * @return An integer (0-15) representing which button was pressed, or -1 if none are pressed
  */
 int button_pressed(uint16_t cur_states, uint16_t prev_states);
 
@@ -59,5 +67,3 @@ uint16_t get_buttons(void);
 #ifdef __cplusplus
 }
 #endif
-
-// function for detecting when a button is pressed
