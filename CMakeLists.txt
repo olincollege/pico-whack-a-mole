@@ -25,6 +25,8 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Werror")
 
 # Include the source files.
 add_subdirectory(src)
+# Include the testing files.
+add_subdirectory(test)
 # Include pimoroni keypad library
 add_subdirectory(rgb_keybad_lib)
 

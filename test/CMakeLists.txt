@@ -8,3 +8,18 @@
 # or similar. The PRIVATE/INTERFACE/PUBLIC keyword will depend on whether the
 # library is used only in function bodies (PRIVATE), only in function
 # signatures/types (INTERFACE), or both (PUBLIC).
+
+
+add_executable(test_which_button
+    test_which_button.c
+)
+
+target_link_libraries(test_which_button
+    pico_stdlib
+    keypad_ctrl
+    game_ctrl
+    scoring
+)
+
+# Generate the UF2 file
+pico_add_extra_outputs(test_which_button)
