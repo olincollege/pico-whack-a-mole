@@ -15,8 +15,6 @@ int main(void) {
   uint16_t last_states = 0;
   int* is_led_on = (int*)malloc(sizeof(int));
   *is_led_on = 0;
-  unsigned long start_time = 0;
-  unsigned long time_on = 500;
 
   while (1) {
     cur_states = get_buttons();
