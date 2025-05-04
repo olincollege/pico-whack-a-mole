@@ -15,3 +15,5 @@ int generate_rand_led(void);
  * @return An unsigned long representing the current time in ms
  */
 unsigned long get_time(void);
+
+int correct_led_pressed(int* is_led_on, int target_led, int pressed);

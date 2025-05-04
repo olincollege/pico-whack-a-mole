@@ -40,12 +40,19 @@ int main(void) {
       cur_states = get_buttons();
       int pressed = button_pressed(cur_states, last_states);
 
-      if (*is_led_on && (target_led == pressed)) {
-        update_score(score);
-        correct_pressed(pressed);
-        turnoff_led(pressed, is_led_on);
+      if (pressed != -1) {
+        if (correct_led_pressed(is_led_on, target_led, pressed)) {
+          update_score(score);
+          flash_status(pressed, 1);
+          turnoff_led(pressed, is_led_on);
+        } else {
+          flash_status(pressed, 0);
+          turnoff_led(target_led, is_led_on);
+          turnoff_led(pressed, is_led_on);
+        }
         break;
       }
+
       last_states = cur_states;
     }
   }
