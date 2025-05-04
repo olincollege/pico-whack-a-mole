@@ -16,4 +16,17 @@ int generate_rand_led(void);
  */
 unsigned long get_time(void);
 
+/**
+ * Returns if the correct led was pressed or not
+ *
+ * @param is_led_on An integer pointer that contains the status of the target
+ * led 0 if off, 1 if on
+ * @param target_led An integer representing the target led (0-15)
+ * @param pressed An integer representing which LED was pressed (0-15), or -1 if
+ * none
+ *
+ * @return An integer representing if the correct led was pressed (1) or not
+ * (0), or -1 if none were pressed
+ */
+
 int correct_led_pressed(int* is_led_on, int target_led, int pressed);

@@ -20,7 +20,7 @@ unsigned long get_time(void) {
 int correct_led_pressed(int* is_led_on, int target_led, int pressed) {
   // If nothing has been pressed, or target led is off return -1
   if (pressed == -1 || (*is_led_on == 0)) {
-    return 0;
+    return -1;
   }
 
   // If wrong led pressed
