@@ -23,13 +23,11 @@ int correct_led_pressed(int* is_led_on, int target_led, int pressed) {
     return -1;
   }
 
-  // If wrong led pressed
-  if (target_led != pressed) {
-    return 0;
-  }
-
   // Correct led pressed while LED was on
   if (*is_led_on && (target_led == pressed)) {
     return 1;
+  } else {
+    // wrong led pressed or led is off
+    return 0;
   }
 }
