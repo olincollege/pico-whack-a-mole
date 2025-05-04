@@ -10,9 +10,8 @@
 #define I2C_PORT i2c1
 #define I2C_SDA 6
 #define I2C_SCL 7
-#define LCD_ADDR 0x27  // Often 0x27 or 0x3F
+#define LCD_ADDR 0x27
 
-// Commands
 #define LCD_BACKLIGHT 0x08
 #define ENABLE_BIT 0x04
 #define CMD_MODE 0x00
@@ -63,7 +62,7 @@ void lcd_send_string(const char* str) {
 void lcd_setup() {
   stdio_init_all();
 
-  i2c_init(I2C_PORT, 100 * 1000);  // 100 kHz
+  i2c_init(I2C_PORT, 100 * 1000);
   gpio_set_function(I2C_SDA, GPIO_FUNC_I2C);
   gpio_set_function(I2C_SCL, GPIO_FUNC_I2C);
   gpio_pull_up(I2C_SDA);
@@ -85,4 +84,8 @@ void update_score(int* score) {
   lcd_send_byte(0xC0, CMD_MODE);  // Line 2
   snprintf(buffer, sizeof(buffer), "%d", *score);
   lcd_send_string(buffer);
+}
+
+void lcd_shutdown(int* score) {
+  lcd_send_string("good game! shutting down...");
 }
