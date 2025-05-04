@@ -17,11 +17,12 @@ int main(void) {
   int* is_led_on = (int*)malloc(sizeof(int));
   *is_led_on = 0;
   int target_led = 0;
+  int skip = 1;
 
   while (1) {
     target_led = generate_rand_led();
     unsigned long start_time = 0;
-    unsigned long time_on = 3000;
+    unsigned long time_on = 500;
 
     while (1) {
       unsigned long now = get_time();
@@ -41,11 +42,9 @@ int main(void) {
 
       if (*is_led_on && (target_led == pressed)) {
         update_score(score);
-        turnoff_led(target_led, is_led_on);
+        correct_pressed(pressed);
+        turnoff_led(pressed, is_led_on);
         break;
-        // trigger the increase score function here
-        // turn led off
-        // break
       }
       last_states = cur_states;
     }

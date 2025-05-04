@@ -74,11 +74,10 @@ void lcd_setup() {
 }
 
 void update_score(int* score) {
-  (*score)++;
+  (*score) = (*score) + 1;
   char buffer[16];
 
   lcd_send_byte(0x01, CMD_MODE);  // Clear screen
-  sleep_ms(2);
 
   lcd_send_byte(0x80, CMD_MODE);  // Line 1
   lcd_send_string("Your Score:");

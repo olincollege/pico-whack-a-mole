@@ -34,6 +34,8 @@ void turnon_led (int led, int* is_led_on);
  */
 void turnoff_led (int led, int* is_led_on);
 
+void correct_pressed(int led);
+
 /**
  * Function to find which button 0-15 has been pressed. Only works for one press,
  * and returns only the first one from 0 to 15 if mulitple are pressed at the same time.

@@ -11,21 +11,32 @@ using namespace pimoroni;
 
 PicoRGBKeypad keypad;
 
+
+
 void keypad_setup(void) {
     keypad.init(); // Set up GPIO
     keypad.set_brightness(0.1f);
+    for(int i = 0; i < keypad.NUM_PADS; i++) {
+        keypad.illuminate(i, 0x05, 0x05, 0x05);
+    }
 }
 
 void turnon_led (int led, int* is_led_on) {
-    keypad.illuminate(led, 255, 0, 255);
+    keypad.illuminate(led, 255, 0, 0);
     keypad.update();
     *is_led_on = 1;
 }
 
 void turnoff_led(int led, int* is_led_on) {
-    keypad.illuminate(led, 0, 0, 0);
+    keypad.illuminate(led, 0x05, 0x05, 0x05);
     keypad.update();
     *is_led_on = 0;
+}
+
+void correct_pressed(int led) {
+    keypad.illuminate(led, 0, 255, 0);
+    keypad.update();
+    sleep_ms(500);
 }
 
 uint16_t get_buttons(void) {
