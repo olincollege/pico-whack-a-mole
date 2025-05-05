@@ -21,5 +21,19 @@ target_link_libraries(test_which_button
     scoring
 )
 
+add_executable(verify_button_press
+verify_button_press.c
+)
+
+target_link_libraries(verify_button_press
+    pico_stdlib
+    keypad_ctrl
+    game_ctrl
+    scoring
+)
+
 # Generate the UF2 file
 pico_add_extra_outputs(test_which_button)
+
+# Generate the UF2 file
+pico_add_extra_outputs(verify_button_press)

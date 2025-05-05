@@ -38,7 +38,7 @@ void lcd_toggle_enable(uint8_t val) {
   sleep_us(500);
 }
 
-void lcd_init() {
+void lcd_init(void) {
   sleep_ms(50);
   lcd_write_nibble(0x30, CMD_MODE);
   sleep_ms(5);
@@ -59,7 +59,7 @@ void lcd_send_string(const char* str) {
   }
 }
 
-void lcd_setup() {
+void lcd_setup(void) {
   stdio_init_all();
 
   i2c_init(I2C_PORT, 100 * 1000);

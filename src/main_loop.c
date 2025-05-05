@@ -36,10 +36,12 @@ int main(void) {
   sleep_ms(STARTUP_TIME_MS);  // startup
 
   while (1) {
+    // main loop
     target_led = generate_rand_led();
     start_time = get_time();
 
     while (!reset_state) {
+      // time loop for turning one led on
       now = get_time();
 
       if (!(*is_led_on)) {
@@ -74,6 +76,7 @@ int main(void) {
     }
 
     while (!reset_state) {
+      // time loop keeping led off
       if (now - start_time_off >= time_off) {
         break;
       }
@@ -81,6 +84,7 @@ int main(void) {
     }
 
     while (reset_state) {
+      // reset loop, waiting for reset button press
       cur_states = get_buttons();
       int pressed_reset = button_pressed(cur_states, last_states);
       if (pressed_reset == RESET_BUTTON) {

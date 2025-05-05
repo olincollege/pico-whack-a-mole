@@ -5,8 +5,9 @@
  * Calls lcd_write_nibble twice to send four bits of the 8 bit val at a time.
  * The mode is the type of command being sent to the lcd screen
  *  (defined CMD_MODE or DATA_MODE)
- * @param unsigned integer of 8 bits called val
- * @param integer called mode
+ *
+ * @param val unsigned integer of 8 bits
+ * @param mode integer mode either CMD_MODE or DATA_MODE
  */
 void lcd_send_byte(uint8_t val, int mode);
 
@@ -19,11 +20,11 @@ void lcd_send_byte(uint8_t val, int mode);
  * Calls the i2c_write_blocking (from i2c library) to send the data to the
  * screen over i2c Calls lcd_toggle_enable to tell the LCD to read the data
  *
- * @param unsigned integer of 8 bits called nibble (in actual implentation use
- * only 4 of these 8 bits --> see lcd_send_byte)
- * @param integer mode  either CMD_MODE or DATA_MODE
+ * @param nibble unsigned integer of 8 bits called nibble (in actual
+ * implentation use only 4 of these 8 bits --> see lcd_send_byte)
+ * @param mode integer mode either CMD_MODE or DATA_MODE
  *
- * defines a temp data uint8_t to be either nibble, lcd_backlight (addr), or
+ * Defines a temp data uint8_t to be either nibble, lcd_backlight (addr), or
  * mode ? data_mode:cmd_mode then uses i2c write_blocking lcd_toggle_enable
  */
 void lcd_write_nibble(uint8_t nibble, int mode);
@@ -40,7 +41,7 @@ void lcd_write_nibble(uint8_t nibble, int mode);
  * Calls i2c_write_blocking (i2c library) twice to send the high to low
  * transition through i2c
  *
- * @param unsigned integer of 8 bits called val
+ * @param val unsigned integer of 8 bits
  */
 void lcd_toggle_enable(uint8_t val);
 
@@ -52,13 +53,13 @@ void lcd_toggle_enable(uint8_t val);
  *
  * No parameters.
  */
-void lcd_init();
+void lcd_init(void);
 
 /**
  * Sends each character of a string one-by-one to the LCD screen
  * using lcd_send_byte in DATA_MODE. Used to display text.
  *
- * @param const char pointer to a null-terminated string (str)
+ * @param str const char pointer to a null-terminated string
  */
 void lcd_send_string(const char* str);
 
@@ -69,7 +70,7 @@ void lcd_send_string(const char* str);
  * Uses sprintf to format "Your Score: X" into a buffer and sends it
  * with lcd_send_string.
  *
- * @param integer pointer to the score variable
+ * @param score Integer pointer to the score variable
  */
 void update_score(int* score);
 
@@ -84,15 +85,16 @@ void update_score(int* score);
  * No parameters.
  */
 
-void lcd_setup();
+void lcd_setup(void);
 
 /**
  * Clears the LCD, displays a goodbye message with the final score,
  * waits a few seconds, and then clears the screen again.
  *
  * Uses lcd_send_byte to send clear and position commands.
- * Formats and displays "Your Score: X" and then a shutdown message.
+ * Formats and displays "Your Score: X" and then a message telling user
+ * which button resets the game.
  *
- * @param integer pointer to the final score
+ * @param score Integer pointer to the final score
  */
 void lcd_reset(int* score);

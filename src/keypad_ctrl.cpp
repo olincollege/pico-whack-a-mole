@@ -52,7 +52,6 @@ void flash_status(int led, int correct) {
             keypad.illuminate(i, RED.r, RED.g, RED.b); // everything red
             keypad.update();
         }
-        // sleep_ms(1000);
     }
 }
 
