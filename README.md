@@ -9,7 +9,7 @@ Have you ever wanted to play a fun handheld version of one of your favorite chil
 The game functions by randomly lighting up buttons one at a time for varying lengths of time. The user must press the button while it is lit to earn a point. If the user hits a button that is not lit then they loose and the game will end.
 
 <div align="center">
-    <img src="demo.mov">
+    <img src="demo.gif">
 </div>
 
 ## Material
