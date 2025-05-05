@@ -30,8 +30,9 @@ The following materials are needed to run the game:
 
 ## Software Set up
 
-1. Create a folder for the project named pico
-2. In this folder clone _this_ repository using the
+1. Make sure that you have CMake set up so that you can build and run code.
+2. Create a folder for the project named pico
+3. In this folder clone _this_ repository using the
 
 ```
 $ git clone
@@ -39,8 +40,41 @@ $ git clone
 
 and copy and pasting the link given when clicking the green code button and selecting the SSH option ![alt text](image-1.png) ![alt text](image-2.png)
 
-3. In the same folder clone the pico-sdk repository using
+4. In the same folder clone the pico-sdk repository using the below command. This will allow us to build.
 
 ```
 $ git clone -b master https://github.com/raspberrypi/pico-sdk.git
 ```
+
+5. Set the PICO_SDK_PATH environment variable to where you just cloned the repo by making a .txt file called pico_sdk_path.txt containing the path to your pico-sdk folder.
+
+6. Go into the pico-sdk folder using:
+
+```
+$ cd pico-sdk
+```
+
+7. run the command:
+
+```
+$ git submodule update --init
+```
+
+8. You will also need the rgb_keybad library which has been included as a part of this repository for your convenience
+
+## Building/Uploading Code
+
+To build code go into your build folder using:
+
+```
+$ cd build/
+```
+
+Next run CMake to compile and build the executable using the following commands:
+
+```
+$ cmake ..
+$ make
+```
+
+To upload code, start by pressing the bootsell button and holding it down while you plug the USB into your computer. You should see a pico pop up, click on it to open the pico file. Next, find the .uf2 file located in **\*\***\_\_**\*\***. This file is created when you build your code. Drag and drop this file into the pico file. You will need to do this everytime to rebuild/flash new code.
