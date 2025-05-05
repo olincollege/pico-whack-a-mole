@@ -11,7 +11,12 @@ using namespace pimoroni;
 
 PicoRGBKeypad keypad;
 
-int OFF_COLOR = 0x05;
+struct color {uint8_t r, g, b;};
+
+color RED  = {100, 0, 0};
+color GREEN  = {0, 100, 0};
+color BLUE  = {0, 0, 100};
+color OFF  = {50, 50, 50};
 
 void keypad_setup(void) {
     keypad.init(); // Set up GPIO
@@ -19,31 +24,35 @@ void keypad_setup(void) {
 
     // Initialize all LEDs to a dim whitish while "off"
     for(int i = 0; i < keypad.NUM_PADS; i++) {
-        keypad.illuminate(i, OFF_COLOR, OFF_COLOR, OFF_COLOR);
+        keypad.illuminate(i, OFF.r, OFF.g, OFF.b);
     }
 }
 
 void turnon_led (int led, int* is_led_on) {
-    keypad.illuminate(led, 0, 0, 255); // blue
+    keypad.illuminate(led, BLUE.r, BLUE.g, BLUE.b); // blue
     keypad.update();
     *is_led_on = 1;
 }
 
 void turnoff_led(int led, int* is_led_on) {
-    keypad.illuminate(led, OFF_COLOR, OFF_COLOR, OFF_COLOR);
+    keypad.illuminate(led, OFF.r, OFF.g, OFF.b);
     keypad.update();
     *is_led_on = 0;
 }
 
 void flash_status(int led, int correct) {
     if (correct) {
-        keypad.illuminate(led, 0, 255, 0); // green
+        keypad.illuminate(led, GREEN.r, GREEN.g, GREEN.b); // green
+        keypad.update();
+        sleep_ms(500);
     }
     else {
-        keypad.illuminate(led, 255, 0, 0); // red
+        for(int i = 0; i < keypad.NUM_PADS; i++) {
+            keypad.illuminate(i, RED.r, RED.g, RED.b); // everything red
+            keypad.update();
+        }
+        sleep_ms(1000);
     }
-    keypad.update();
-    sleep_ms(500);
 }
 
 uint16_t get_buttons(void) {

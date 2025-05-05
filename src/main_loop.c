@@ -1,6 +1,7 @@
 // main game loop
 #include <stdio.h>
 #include <stdlib.h>
+#include <time.h>
 
 #include "game_ctrl.h"
 #include "keypad_ctrl.h"
@@ -10,6 +11,7 @@
 int main(void) {
   keypad_setup();
   lcd_setup();
+  srand(time_us_64());
   uint16_t cur_states = 0;
   uint16_t last_states = 0;
   int* score = (int*)malloc(sizeof(int));
@@ -17,15 +19,17 @@ int main(void) {
   int* is_led_on = (int*)malloc(sizeof(int));
   *is_led_on = 0;
   int target_led = 0;
-  int skip = 1;
 
   while (1) {
     target_led = generate_rand_led();
     unsigned long start_time = 0;
+    unsigned long start_time_off = 0;
     unsigned long time_on = 500;
+    unsigned long time_off = (rand() % (1000 - 200 + 1)) + 200;
+    unsigned long now = 0;
 
     while (1) {
-      unsigned long now = get_time();
+      now = get_time();
 
       if (!(*is_led_on)) {
         turnon_led(target_led, is_led_on);
@@ -34,6 +38,7 @@ int main(void) {
 
       if ((*is_led_on) && (now - start_time >= time_on)) {
         turnoff_led(target_led, is_led_on);
+        start_time_off = get_time();
         break;
       }
 
@@ -47,16 +52,24 @@ int main(void) {
           turnoff_led(pressed, is_led_on);
         } else {
           flash_status(pressed, 0);
-          turnoff_led(target_led, is_led_on);
-          turnoff_led(pressed, is_led_on);
+          lcd_shutdown(score);
+          free(score);
+          free(is_led_on);
+          exit(0);
         }
+        start_time_off = get_time();
         break;
       }
-
       last_states = cur_states;
     }
+
+    while (1) {
+      now = get_time();
+      if (now - start_time_off >= time_off) {
+        break;
+      }
+    }
   }
-  free(is_led_on);
-  free(score);
+
   return 0;
 }

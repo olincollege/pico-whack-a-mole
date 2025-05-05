@@ -36,7 +36,7 @@ void turnoff_led (int led, int* is_led_on);
 
 /**
  * Function to flash the status of the LED pressed (correct or incorrect). The LED will
- * flash green if it's the correct one, and red if it's incorrectly pressed.
+ * flash green if it's the correct one, and all will flash red if it's incorrect.
  * 
  * @param led: The integer representing an LED button on the keypad to flash
  * @param correct: An integer representing if the LED pressed was correct (1) or not (0)
