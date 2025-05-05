@@ -28,8 +28,8 @@ int main(void) {
   unsigned long start_time = 0;
   unsigned long start_time_off = 0;
   unsigned long now = 0;
-  unsigned long time_on = 400;
-  unsigned long time_off = (rand() % (500 - 200 + 1)) + 200;
+  unsigned long time_on = 500;
+  unsigned long time_off = (rand() % (800 - 200 + 1)) + 200;
 
   int reset_state = 0;
 
@@ -64,7 +64,7 @@ int main(void) {
         } else {
           flash_status(pressed, 0);
           reset_state = 1;
-          lcd_shutdown(score);
+          lcd_reset(score);
         }
         start_time_off = get_time();
         now = get_time();
@@ -82,8 +82,8 @@ int main(void) {
 
     while (reset_state) {
       cur_states = get_buttons();
-      pressed = button_pressed(cur_states, last_states);
-      if (pressed == RESET_BUTTON) {
+      int pressed_reset = button_pressed(cur_states, last_states);
+      if (pressed_reset == RESET_BUTTON) {
         reset_state = 0;
         keypad_setup();
         *score = 0;

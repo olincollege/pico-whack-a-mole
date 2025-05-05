@@ -95,4 +95,4 @@ void lcd_setup();
  *
  * @param integer pointer to the final score
  */
-void lcd_shutdown(int* score);
+void lcd_reset(int* score);
