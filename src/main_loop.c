@@ -8,27 +8,38 @@
 #include "pico/stdlib.h"
 #include "scoring.h"
 
+int RESET_BUTTON = 0;
+int STARTUP_TIME_MS = 800;
+
 int main(void) {
   keypad_setup();
   lcd_setup();
   srand(time_us_64());
   uint16_t cur_states = 0;
   uint16_t last_states = 0;
+  int pressed = -1;
+
   int* score = (int*)malloc(sizeof(int));
   *score = 0;
   int* is_led_on = (int*)malloc(sizeof(int));
   *is_led_on = 0;
   int target_led = 0;
 
+  unsigned long start_time = 0;
+  unsigned long start_time_off = 0;
+  unsigned long now = 0;
+  unsigned long time_on = 400;
+  unsigned long time_off = (rand() % (500 - 200 + 1)) + 200;
+
+  int reset_state = 0;
+
+  sleep_ms(STARTUP_TIME_MS);  // startup
+
   while (1) {
     target_led = generate_rand_led();
-    unsigned long start_time = 0;
-    unsigned long start_time_off = 0;
-    unsigned long time_on = 500;
-    unsigned long time_off = (rand() % (1000 - 200 + 1)) + 200;
-    unsigned long now = 0;
+    start_time = get_time();
 
-    while (1) {
+    while (!reset_state) {
       now = get_time();
 
       if (!(*is_led_on)) {
@@ -43,7 +54,7 @@ int main(void) {
       }
 
       cur_states = get_buttons();
-      int pressed = button_pressed(cur_states, last_states);
+      pressed = button_pressed(cur_states, last_states);
 
       if (pressed != -1) {
         if (correct_led_pressed(is_led_on, target_led, pressed)) {
@@ -52,24 +63,36 @@ int main(void) {
           turnoff_led(pressed, is_led_on);
         } else {
           flash_status(pressed, 0);
+          reset_state = 1;
           lcd_shutdown(score);
-          free(score);
-          free(is_led_on);
-          exit(0);
         }
         start_time_off = get_time();
+        now = get_time();
         break;
       }
       last_states = cur_states;
     }
 
-    while (1) {
-      now = get_time();
+    while (!reset_state) {
       if (now - start_time_off >= time_off) {
         break;
       }
+      now = get_time();
+    }
+
+    while (reset_state) {
+      cur_states = get_buttons();
+      pressed = button_pressed(cur_states, last_states);
+      if (pressed == RESET_BUTTON) {
+        reset_state = 0;
+        keypad_setup();
+        *score = 0;
+        sleep_ms(STARTUP_TIME_MS);
+      }
+      last_states = cur_states;
     }
   }
-
+  free(score);
+  free(is_led_on);
   return 0;
 }

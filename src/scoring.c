@@ -86,7 +86,7 @@ void update_score(int* score) {
   lcd_send_string(buffer);
 }
 
-void lcd_shutdown(int* score) {
+void lcd_reset(int* score) {
   char buffer[32];
 
   lcd_send_byte(0x01, CMD_MODE);
@@ -101,9 +101,5 @@ void lcd_shutdown(int* score) {
   lcd_send_byte(0x80, CMD_MODE);
   lcd_send_string("Good Game!");
   lcd_send_byte(0xC0, CMD_MODE);
-  lcd_send_string("Shutting down...");
-
-  sleep_ms(3000);
-
-  lcd_send_byte(0x08, CMD_MODE);
+  lcd_send_string("Press Button 0 to Restart!");
 }
