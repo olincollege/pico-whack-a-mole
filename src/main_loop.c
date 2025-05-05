@@ -52,8 +52,6 @@ int main(void) {
           turnoff_led(pressed, is_led_on);
         } else {
           flash_status(pressed, 0);
-          turnoff_led(target_led, is_led_on);
-          turnoff_led(pressed, is_led_on);
           lcd_shutdown(score);
           free(score);
           free(is_led_on);
