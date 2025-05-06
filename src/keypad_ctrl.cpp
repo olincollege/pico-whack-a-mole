@@ -1,11 +1,12 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <stdint.h>
-#include <math.h>
-#include "pico/stdlib.h"
-
-#include "pico_rgb_keypad.hpp"
 #include "keypad_ctrl.h"
+#include "pico/stdlib.h"
+#include "pico_rgb_keypad.hpp"
+
+#include <cmath>
+#include <cstdint>
+#include <cstdio>
+#include <cstdlib>
+
 
 using namespace pimoroni;
 
