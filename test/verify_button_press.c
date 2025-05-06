@@ -1,3 +1,7 @@
+/**
+ * Test to verify that we're correctly matching a target_led to a pressed LED
+ */
+
 #include <stdio.h>
 #include <stdlib.h>
 

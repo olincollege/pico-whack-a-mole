@@ -1,4 +1,6 @@
-// Tests that program recognizes which button was pressed
+/**
+ * Test to verify we are reading the correct button when pressed.
+ */
 
 #include <stdio.h>
 #include <stdlib.h>

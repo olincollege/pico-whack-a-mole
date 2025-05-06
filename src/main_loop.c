@@ -1,16 +1,23 @@
-// main game loop
-#include <stdio.h>
+/**
+ * File for the main game loop.
+ */
+
+#include <stdint.h>
 #include <stdlib.h>
-#include <time.h>
 
 #include "game_ctrl.h"
 #include "keypad_ctrl.h"
-#include "pico/stdlib.h"
+#include "pico/stdlib.h"  // Hey! Clang-tidy might show an error here, but the pico_sdk_import.cmake file in our repo
+// links the library with the pico sdk path we gave it. It just shows up as not
+// included but it is.
 #include "scoring.h"
 
-int RESET_BUTTON = 0;
-int STARTUP_TIME_MS = 800;
+const int RESET_BUTTON = 0;
+const int STARTUP_TIME_MS = 800;
 
+// NOLINTBEGIN(readability-function-cognitive-complexity)
+// Given that this is the game loop, it has a lot of while loops that trigger
+// the complexity warning.
 int main(void) {
   keypad_setup();
   lcd_setup();
@@ -28,8 +35,8 @@ int main(void) {
   unsigned long start_time = 0;
   unsigned long start_time_off = 0;
   unsigned long now = 0;
-  unsigned long time_on = 500;
-  unsigned long time_off = (rand() % (800 - 200 + 1)) + 200;
+  const unsigned long time_on = 500;
+  const unsigned long time_off = 800;
 
   int reset_state = 0;
 
@@ -100,3 +107,4 @@ int main(void) {
   free(is_led_on);
   return 0;
 }
+// NOLINTEND(readability-function-cognitive-complexity)

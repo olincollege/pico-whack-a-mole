@@ -7,15 +7,16 @@
 #include "hardware/i2c.h"
 #include "pico/stdlib.h"
 
-#define I2C_PORT i2c1
-#define I2C_SDA 6
-#define I2C_SCL 7
-#define LCD_ADDR 0x27
-
-#define LCD_BACKLIGHT 0x08
-#define ENABLE_BIT 0x04
-#define CMD_MODE 0x00
-#define DATA_MODE 0x01
+typedef enum {
+  I2C_PORT = i2c1,
+  I2C_SDA = 6,
+  I2C_SCL = 7,
+  LCD_ADDR = 0x27,
+  LCD_BACKLIGHT = 0x08,
+  ENABLE_BIT = 0x04,
+  CMD_MODE = 0x00,
+  DATA_MODE = 0x01
+} I2C_Config;
 
 void lcd_send_byte(uint8_t val, int mode) {
   lcd_write_nibble(val & 0xF0, mode);

@@ -19,8 +19,6 @@ project(Whack-A-Mole C CXX ASM)
 pico_sdk_init()
 set(PICO_BOARD pico)
 
-# pico_find_compiler(PICO_COMPILER_LD ${PICO_GCC_TRIPLE}-ld)
-
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Werror")
 
 # Include the source files.

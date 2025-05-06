@@ -12,11 +12,14 @@ int generate_rand_led(void) {
 }
 
 unsigned long get_time(void) {
-  struct timeval tv;
-  gettimeofday(&tv, NULL);
-  return (tv.tv_sec * 1000) + (tv.tv_usec / 1000);
+  // NOLINTNEXTLINE(misc-include-cleaner)
+  struct timeval tv_time;
+  gettimeofday(&tv_time, NULL);
+  const int mili_divider = 1000;
+  return (tv_time.tv_sec * mili_divider) + (tv_time.tv_usec / mili_divider);
 }
 
+// NOLINTNEXTLINE(readability-non-const-parameter)
 int correct_led_pressed(int* is_led_on, int target_led, int pressed) {
   // If nothing has been pressed, or target led is off return -1
   if (pressed == -1 || (*is_led_on == 0)) {
@@ -24,10 +27,5 @@ int correct_led_pressed(int* is_led_on, int target_led, int pressed) {
   }
 
   // Correct led pressed while LED was on
-  if (*is_led_on && (target_led == pressed)) {
-    return 1;
-  } else {
-    // wrong led pressed or led is off
-    return 0;
-  }
+  return (*is_led_on && (target_led == pressed));
 }
