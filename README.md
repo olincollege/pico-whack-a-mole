@@ -15,7 +15,7 @@ The game functions by randomly lighting up buttons one at a time for varying len
 - Reset button at end of game for multiple rounds
 
 <div align="center">
-    <img src="demo.gif">
+    <img src="assets/demo.gif">
 </div>
 
 ## Material
@@ -36,7 +36,7 @@ The following materials are needed to run the game:
 2. Solder the header pins to the RasPi Pico with the shorter ends on the side with the bootsell button.
 3. Insert the Pico pins into the header pin holder already present on the RGB keypad board. Install the board with the bootsell button facing upwards so the button is easily accessible.
 4. Use the socket to socket jumpers to attach the RBG keypad to the LED display. Connect the 1 pin on the LED display to the VBUS pin on the pico, connect the 2 pin on the LED display to a ground pin on the pico, connect the 3 pin on the LED display to the GP6 pin on the pico, and finally connect the 4 pin on the LED display to the GP 7 pin on the pico.
-   ![alt text](image.png)
+   ![alt text](assets/image.png)
 
 ## Software Set up
 
@@ -48,7 +48,7 @@ The following materials are needed to run the game:
 $ git clone
 ```
 
-and copy and pasting the link given when clicking the green code button and selecting the SSH option ![alt text](image-1.png) ![alt text](image-2.png)
+and copy and pasting the link given when clicking the green code button and selecting the SSH option ![alt text](assets/image-1.png) ![alt text](assets/image-2.png)
 
 4. In the same folder, clone the pico-sdk repository using the below command. This will give us access to all the Pico functions needed to run our repo.
 
